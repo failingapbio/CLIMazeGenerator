@@ -136,6 +136,7 @@ void tessellate_and_print_maze(const int total_iterations) {
 
 int main()
     {
+        //initial announcements
         cout << "Hello!" << endl;
         this_thread::sleep_for(chrono::milliseconds(750));
         cout << "This program generates a maze randomly using tessellation." << endl;
@@ -145,8 +146,9 @@ int main()
         cout << "Enjoy!" << endl;
         this_thread::sleep_for(chrono::milliseconds(1250));
         cout << "Size of maze:" << endl;
-        int number_of_iterations;
 
+        //declare how big the maze will be (2x2, 4x4, 8x8, or 16x16)
+        int number_of_iterations;
         while (!(cin >> number_of_iterations)|| number_of_iterations < 1 || number_of_iterations > 4) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(),'\n');
@@ -155,6 +157,8 @@ int main()
         const int size_in_units = static_cast<int>(pow(base, number_of_iterations));
         cout << "Height of maze:" << endl;
         cout << "Your maze will be " << size_in_units << " units long and " << size_in_units << " units wide" << endl <<endl;
+
+        //start generation
         tessellate_and_print_maze(number_of_iterations);
         return 0;
     }
