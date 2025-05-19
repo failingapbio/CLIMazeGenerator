@@ -3,6 +3,7 @@
 #include <random>
 #include <thread>
 #include <cmath>
+
 using namespace std;
 
 constexpr int base = static_cast<int>(2);
@@ -124,10 +125,12 @@ void tessellate_and_print_maze(const int total_iterations) {
     for(int y_print = 0; y_print < y_dimension; y_print++) {
         for(int x_print = 0; x_print < x_dimension; x_print++) {
             if (maze[x_print][y_print] == false) {
-                cout << " ";
+                //white spaces
+                cout << "\e[107m" << " " << "\e[0m";
             }
             else {
-                cout << "#";
+                //black walls
+                cout << "\033[40m" << "\033[30m" << " " << "\e[0m";
             }
         }
         cout << endl;
