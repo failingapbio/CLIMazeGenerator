@@ -7,7 +7,7 @@
 using namespace std;
 
 constexpr int base = static_cast<int>(2);
-constexpr int cell_width = static_cast<int>(5);
+constexpr int cell_width = static_cast<int>(2);
 constexpr int cell_height = static_cast<int>(2);
 void tessellate_and_print_maze(const int total_iterations) {
 
@@ -19,8 +19,8 @@ void tessellate_and_print_maze(const int total_iterations) {
     bool maze[x_dimension][y_dimension];
 
     //make the unit square first
-    for(int y = 0; y < 3; y++) {
-        for(int x = 0; x < 6; x++) {
+    for(int y = 0; y < cell_height + 1; y++) {
+        for(int x = 0; x < cell_width + 1; x++) {
             if(y % cell_height == 1) {
                 if ((x+1) % cell_width == 1) {
                     maze[x][y] = true;
@@ -37,7 +37,7 @@ void tessellate_and_print_maze(const int total_iterations) {
 
     //Declare variables needed for expand/puncture
     int previous_length=cell_width, previous_height=cell_height;
-    int current_length=10, current_height=4;
+    int current_length=cell_width * 2, current_height=cell_height * 2;
     int x,y;
 
     //Seed random numbers for unit puncturing
@@ -126,11 +126,11 @@ void tessellate_and_print_maze(const int total_iterations) {
         for(int x_print = 0; x_print < x_dimension; x_print++) {
             if (maze[x_print][y_print] == false) {
                 //white spaces
-                cout << "\e[107m" << " " << "\e[0m";
+                cout << "\e[107m" << "  " << "\e[0m";
             }
             else {
                 //black walls
-                cout << "\033[40m" << "\033[30m" << " " << "\e[0m";
+                cout << "\033[40m" << "\033[30m" << "  " << "\e[0m";
             }
         }
         cout << endl;
@@ -165,4 +165,3 @@ int main()
         tessellate_and_print_maze(number_of_iterations);
         return 0;
     }
-
